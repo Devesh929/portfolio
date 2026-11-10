@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Devesh Chaudhary — AI Engineer portfolio spanning classical machine learning, local LLM fine-tuning, healthcare AI, defense edge intelligence, multimodal reasoning, inference optimization and telemetry systems." />
+  <meta name="theme-color" content="#070707" />
+  <title>Devesh Chaudhary — AI Engineer</title>
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: #0c0c0c;
+      --panel-2: #111111;
+      --panel-3: #171717;
+      --ink: #f5f5f0;
+      --muted: #9b9b91;
+      --line: rgba(255,255,255,.11);
+      --yellow: #ffd400;
+      --yellow-2: #ffea00;
+      --danger: #ff5e57;
+      --success: #65e59b;
+      --radius: 22px;
+      --max: 1240px;
+      --shadow: 0 30px 80px rgba(0,0,0,.55);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255,212,0,.09), transparent 24%),
+        radial-gradient(circle at 85% 18%, rgba(255,212,0,.04), transparent 28%),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .23;
+      z-index: -2;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 82%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    ::selection { color: #000; background: var(--yellow); }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 20;
+      opacity: .035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+    }
+
+    .cursor-glow {
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(255,212,0,.08), transparent 67%);
+      transition: opacity .25s ease;
+    }
+
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--yellow);
+      font-size: .78rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .eyebrow::before { content: ""; width: 30px; height: 2px; background: var(--yellow); }
+
+    .topbar {
+      position: fixed;
+      z-index: 50;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1180px, calc(100% - 24px));
+      height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px 0 20px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(7,7,7,.78);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 48px rgba(0,0,0,.38);
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 850; letter-spacing: -.02em; }
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--yellow);
+      color: #000;
+      font-size: .9rem;
+      font-weight: 950;
+    }
+    .brand small { color: var(--muted); display: block; font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; }
+
+    .nav { display: flex; align-items: center; gap: 4px; }
+    .nav a, .nav button {
+      border: 0;
+      color: #d8d8d1;
+      background: transparent;
+      padding: 11px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: .2s ease;
+      font-size: .88rem;
+    }
+    .nav a:hover, .nav button:hover { background: #161616; color: white; }
+    .nav .cta-nav { background: var(--yellow); color: #000; font-weight: 850; }
+    .nav .cta-nav:hover { background: var(--yellow-2); color: #000; }
+    .menu-button { display: none !important; }
+
+    .hero {
+      min-height: 100vh;
+      padding: 132px 0 60px;
+      display: grid;
+      align-items: center;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: #cfcfc8;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      margin-bottom: 24px;
+      font-size: .82rem;
+      background: rgba(255,255,255,.025);
+    }
+    .availability i { width: 8px; height: 8px; background: var(--success); border-radius: 50%; box-shadow: 0 0 18px var(--success); }
+
+    h1 {
+      font-size: clamp(3.5rem, 7vw, 7.1rem);
+      line-height: .88;
+      letter-spacing: -.075em;
+      margin: 0 0 30px;
+      max-width: 900px;
+    }
+    h1 .outline {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,.72);
+    }
+    h1 .yellow { color: var(--yellow); }
+    .hero-copy {
+      max-width: 690px;
+      color: #b7b7af;
+      font-size: clamp(1rem, 1.6vw, 1.2rem);
+      margin: 0 0 32px;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      min-height: 50px;
+      padding: 0 20px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: white;
+      background: #101010;
+      cursor: pointer;
+      font-weight: 800;
+      transition: .22s ease;
+    }
+    .btn:hover { transform: translateY(-2px); border-color: rgba(255,212,0,.45); }
+    .btn.primary { background: var(--yellow); color: #000; border-color: var(--yellow); }
+    .btn.primary:hover { box-shadow: 0 13px 34px rgba(255,212,0,.2); }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 42px;
+      max-width: 720px;
+    }
+    .meta-card {
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+    }
+    .meta-card strong { display: block; font-size: 1.8rem; letter-spacing: -.05em; }
+    .meta-card span { color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .09em; }
+
+    .hero-visual {
+      position: relative;
+      min-height: 630px;
+      display: grid;
+      place-items: center;
+    }
+    .orbit {
+      width: min(560px, 100%);
+      aspect-ratio: 1;
+      border: 1px solid rgba(255,212,0,.18);
+      border-radius: 50%;
+      position: absolute;
+      animation: spin 30s linear infinite;
+    }
+    .orbit:nth-child(2) { width: 75%; animation-direction: reverse; animation-duration: 22s; border-style: dashed; }
+    .orbit::after {
+      content: "";
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--yellow);
+      top: 14%;
+      left: 14%;
+      box-shadow: 0 0 22px var(--yellow);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .console {
+      position: relative;
+      width: min(470px, 92%);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 28px;
+      padding: 18px;
+      background: linear-gradient(145deg, rgba(30,30,30,.94), rgba(8,8,8,.95));
+      box-shadow: var(--shadow), inset 0 1px rgba(255,255,255,.06);
+      transform: rotate(-2deg);
+    }
+    .console-bar { display: flex; gap: 7px; padding: 4px 2px 15px; }
+    .console-bar i { width: 8px; height: 8px; border-radius: 50%; background: #333; }
+    .console-bar i:first-child { background: var(--yellow); }
+    .console-screen {
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #070707;
+      overflow: hidden;
+    }
+    .screen-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 14px;
+      color: #c4c4bd;
+      font-size: .75rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--success); box-shadow: 0 0 14px var(--success); }
+    .terminal { padding: 18px; min-height: 310px; font-family: "SFMono-Regular", Consolas, monospace; font-size: .76rem; color: #d8d8d1; }
+    .terminal .cmd { color: var(--yellow); }
+    .terminal .dim { color: #73736e; }
+    .terminal .good { color: var(--success); }
+    .terminal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 24px; }
+    .terminal-tile { padding: 12px; border: 1px solid var(--line); background: #0d0d0d; border-radius: 12px; }
+    .terminal-tile small { color: var(--muted); display: block; }
+    .terminal-tile b { display: block; margin-top: 4px; color: white; }
+    .console-foot { display: flex; justify-content: space-between; padding: 14px 4px 2px; color: var(--muted); font-size: .74rem; }
+    .floating-tag {
+      position: absolute;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,212,0,.28);
+      background: rgba(10,10,10,.86);
+      color: var(--yellow);
+      backdrop-filter: blur(10px);
+      font-size: .73rem;
+      font-weight: 750;
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      animation: float 4.6s ease-in-out infinite;
+    }
+    .tag-1 { top: 12%; right: -1%; }
+    .tag-2 { bottom: 19%; left: -4%; animation-delay: -1.1s; }
+    .tag-3 { bottom: 5%; right: 3%; animation-delay: -2.2s; }
+    @keyframes float { 50% { transform: translateY(-10px); } }
+
+    section { padding: 100px 0; }
+    .section-head { display: flex; justify-content: space-between; gap: 30px; align-items: end; margin-bottom: 42px; }
+    .section-head h2 { margin: 10px 0 0; font-size: clamp(2.2rem, 4.5vw, 4.7rem); line-height: .96; letter-spacing: -.055em; }
+    .section-head p { max-width: 520px; color: var(--muted); margin: 0; }
+
+    .ticker {
+      overflow: hidden;
+      border-block: 1px solid var(--line);
+      background: #080808;
+    }
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: ticker 35s linear infinite;
+    }
+    .ticker-track span {
+      display: inline-flex;
+      align-items: center;
+      gap: 22px;
+      min-width: max-content;
+      padding: 17px 22px;
+      color: #cecec8;
+      font-size: .86rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+    .ticker-track span::after { content: "✦"; color: var(--yellow); }
+    @keyframes ticker { to { transform: translateX(-50%); } }
+
+    .about-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: 70px; }
+    .quote-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      background: linear-gradient(160deg, rgba(255,212,0,.11), rgba(255,255,255,.015) 42%);
+      min-height: 340px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .quote-card .quote { font-size: clamp(1.8rem, 3vw, 3rem); line-height: 1.05; letter-spacing: -.04em; }
+    .quote-card .signature { color: var(--yellow); font-weight: 850; }
+    .about-copy { color: #b9b9b2; font-size: 1.05rem; }
+    .about-copy strong { color: white; }
+    .principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 28px; }
+    .principle { padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.02); }
+    .principle b { display: block; margin-bottom: 5px; }
+    .principle span { color: var(--muted); font-size: .86rem; }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+    .filter-btn {
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #0b0b0b;
+      color: #c3c3bd;
+      cursor: pointer;
+      transition: .2s;
+    }
+    .filter-btn.active, .filter-btn:hover { color: #000; background: var(--yellow); border-color: var(--yellow); }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .project {
+      grid-column: span 6;
+      position: relative;
+      min-height: 540px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(155deg, #151515, #080808 62%);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .3s ease, border-color .3s ease;
+    }
+    .project:hover { transform: translateY(-7px); border-color: rgba(255,212,0,.4); }
+    .project.featured { grid-column: span 7; }
+    .project.slim { grid-column: span 5; }
+    .project::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      right: -130px;
+      top: -130px;
+      background: radial-gradient(circle, rgba(255,212,0,.17), transparent 68%);
+      pointer-events: none;
+    }
+    .project-no { color: var(--yellow); font-size: .76rem; letter-spacing: .14em; text-transform: uppercase; }
+    .project h3 { font-size: clamp(1.75rem, 2.8vw, 2.7rem); line-height: 1; letter-spacing: -.05em; margin: 18px 0 14px; max-width: 560px; }
+    .project p { color: var(--muted); max-width: 600px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 20px 0; }
+    .chip { padding: 7px 10px; border-radius: 999px; color: #cacac4; background: #171717; border: 1px solid rgba(255,255,255,.08); font-size: .72rem; }
+    .impact-strip { position: absolute; left: 26px; right: 26px; bottom: 24px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: end; }
+    .impact-strip small { color: var(--muted); display: block; margin-bottom: 5px; }
+    .impact-strip b { font-size: 1.08rem; }
+    .open-project { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; color: #000; background: var(--yellow); font-size: 1.3rem; }
+
+    .project-visual { margin-top: 22px; height: 132px; position: relative; border-radius: 15px; border: 1px solid var(--line); overflow: hidden; background: #080808; }
+    .project-visual .bars { position: absolute; inset: 20px; display: flex; align-items: end; gap: 7px; }
+    .project-visual .bars i { flex: 1; border-radius: 4px 4px 1px 1px; background: linear-gradient(to top, #3c3300, var(--yellow)); opacity: .85; }
+    .project-visual .line-svg { width: 100%; height: 100%; }
+    .node-map { position: absolute; inset: 0; }
+    .node-map i { position: absolute; width: 9px; height: 9px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 14px rgba(255,212,0,.65); }
+    .node-map i:nth-child(1) { left: 12%; top: 60%; }
+    .node-map i:nth-child(2) { left: 31%; top: 28%; }
+    .node-map i:nth-child(3) { left: 52%; top: 56%; }
+    .node-map i:nth-child(4) { left: 70%; top: 23%; }
+    .node-map i:nth-child(5) { left: 86%; top: 50%; }
+    .node-map::before { content:""; position:absolute; inset:0; background: linear-gradient(145deg, transparent 20%, rgba(255,212,0,.08), transparent 75%); }
+
+    .domain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .domain-card {
+      min-height: 410px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(155deg, rgba(255,212,0,.055), #0a0a0a 42%);
+      transition: transform .28s ease, border-color .28s ease;
+    }
+    .domain-card:hover { transform: translateY(-6px); border-color: rgba(255,212,0,.42); }
+    .domain-top { display:flex; justify-content:space-between; gap:20px; align-items:center; color:var(--yellow); font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; }
+    .domain-top span { width:34px; height:34px; border:1px solid rgba(255,212,0,.35); border-radius:50%; display:grid; place-items:center; }
+    .domain-card h3 { margin:20px 0 18px; font-size:1.55rem; line-height:1.08; letter-spacing:-.035em; }
+    .domain-card > p { color:var(--muted); margin:18px 0 0; }
+    .domain-visual { height:150px; position:relative; overflow:hidden; border:1px solid var(--line); border-radius:16px; background:#080808; }
+    .domain-visual svg { width:100%; height:100%; }
+    .mini-labels { position:absolute; left:14px; right:14px; bottom:10px; display:flex; justify-content:space-between; gap:8px; }
+    .mini-labels span { color:#b8b8b1; background:rgba(5,5,5,.86); border:1px solid rgba(255,255,255,.08); border-radius:999px; padding:4px 7px; font-size:.62rem; text-transform:uppercase; letter-spacing:.08em; }
+
+    .project-visual.token-flow, .project-visual.dataset-flow { display:flex; align-items:center; justify-content:center; gap:10px; padding:14px; }
+    .token-stage, .dataset-flow > div { min-width:0; flex:1; height:76px; padding:11px; border:1px solid var(--line); border-radius:12px; display:flex; flex-direction:column; justify-content:space-between; background:#111; }
+    .token-stage.yellow, .dataset-flow > div.yellow { border-color:rgba(255,212,0,.55); background:rgba(255,212,0,.08); }
+    .token-stage small, .dataset-flow small { color:var(--muted); font-size:.65rem; }
+    .token-stage b, .dataset-flow b { font-size:.88rem; }
+    .token-flow > span, .dataset-flow > span { color:var(--yellow); font-weight:900; }
+    .health-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; padding:12px; }
+    .health-grid > div { border:1px solid var(--line); border-radius:10px; padding:9px; display:flex; flex-direction:column; gap:5px; background:#101010; }
+    .health-grid small { color:var(--muted); font-size:.62rem; }
+    .health-grid b { font-size:1.1rem; }
+    .health-grid i { height:4px; background:var(--yellow); display:block; border-radius:999px; }
+    .fusion-project svg { width:100%; height:100%; }
+    .readiness-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:12px; }
+    .readiness-grid > div { display:grid; grid-template-columns:80px 1fr 38px; gap:8px; align-items:center; border:1px solid var(--line); border-radius:10px; padding:9px; background:#101010; font-size:.66rem; }
+    .readiness-grid span { color:#c9c9c2; }
+    .readiness-grid i, .cache-row i { display:block; height:6px; border-radius:999px; background:#242424; overflow:hidden; }
+    .readiness-grid i b, .cache-row i b { display:block; height:100%; background:var(--yellow); border-radius:999px; }
+    .readiness-grid em { font-style:normal; color:var(--yellow); text-align:right; }
+    .cache-visual { padding:12px; display:flex; flex-direction:column; gap:8px; }
+    .cache-row { display:grid; grid-template-columns:150px 1fr 55px; gap:10px; align-items:center; padding:7px 8px; border:1px solid var(--line); border-radius:9px; background:#101010; }
+    .cache-row span { color:#c9c9c2; font-size:.68rem; }
+    .cache-row em { color:var(--yellow); font-size:.6rem; font-style:normal; text-align:right; letter-spacing:.08em; }
+
+    .stack-grid-3 { grid-template-columns: repeat(3, 1fr) !important; }
+    .flow-7 { grid-template-columns: repeat(7, 1fr); }
+    .systems-matrix { margin-top:16px; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:#090909; }
+    .matrix-head, .matrix-row { display:grid; grid-template-columns:1.7fr repeat(3,1fr); align-items:center; }
+    .matrix-head { background:rgba(255,212,0,.08); color:#dcdcd5; font-size:.7rem; text-transform:uppercase; letter-spacing:.1em; }
+    .matrix-head span, .matrix-row span, .matrix-row b { padding:14px 18px; border-right:1px solid var(--line); }
+    .matrix-head span:last-child, .matrix-row b:last-child { border-right:0; }
+    .matrix-row { border-top:1px solid var(--line); }
+    .matrix-row span { color:#b8b8b1; }
+    .matrix-row b { color:var(--yellow); text-align:center; font-size:1.05rem; }
+
+    .stack-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .stack-panel { border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; background: #0a0a0a; }
+    .stack-panel h3 { font-size: 1.6rem; margin: 0 0 8px; letter-spacing: -.03em; }
+    .stack-panel p { color: var(--muted); margin: 0 0 24px; }
+    .tech-cloud { display: flex; flex-wrap: wrap; gap: 9px; }
+    .tech {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: #d8d8d1;
+      background: #111;
+      transition: .2s;
+    }
+    .tech:hover { color: #000; background: var(--yellow); border-color: var(--yellow); transform: translateY(-2px); }
+
+    .architecture {
+      margin-top: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      background: linear-gradient(135deg, rgba(255,212,0,.06), transparent 42%), #090909;
+    }
+    .architecture h3 { margin: 0 0 24px; font-size: 1.6rem; }
+    .flow { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; align-items: center; }
+    .flow-step { position: relative; min-height: 110px; display: flex; flex-direction: column; justify-content: space-between; padding: 16px; border-radius: 15px; border: 1px solid var(--line); background: #101010; }
+    .flow-step:not(:last-child)::after { content: "→"; position: absolute; right: -14px; top: 41%; color: var(--yellow); z-index: 3; }
+    .flow-step b { font-size: .86rem; }
+    .flow-step span { color: var(--muted); font-size: .72rem; }
+    .flow-step i { color: var(--yellow); font-style: normal; font-size: 1.4rem; }
+
+    .timeline { position: relative; margin-top: 20px; }
+    .timeline::before { content:""; position:absolute; top:0; bottom:0; left: 23px; width: 1px; background: var(--line); }
+    .timeline-item { position: relative; display: grid; grid-template-columns: 48px 170px 1fr; gap: 22px; padding: 0 0 38px; }
+    .timeline-dot { width: 47px; height: 47px; display:grid; place-items:center; border-radius:50%; border:1px solid rgba(255,212,0,.38); background:#080808; color:var(--yellow); z-index:1; font-weight:900; }
+    .timeline-year { color: var(--yellow); font-weight: 850; padding-top: 10px; }
+    .timeline-content { padding: 0 0 28px; border-bottom: 1px solid var(--line); }
+    .timeline-content h3 { margin: 5px 0 8px; font-size: 1.4rem; }
+    .timeline-content p { margin: 0; color: var(--muted); }
+
+
+    footer { padding: 28px 0 40px; color: var(--muted); }
+    .footer-row { display: flex; justify-content: space-between; gap: 20px; padding-top: 22px; border-top: 1px solid var(--line); }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal.open { display: flex; }
+    .modal-card {
+      width: min(920px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #0a0a0a;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+    }
+    .modal-top { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; background: rgba(10,10,10,.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .modal-close { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line); color: white; background: #151515; cursor: pointer; }
+    .modal-body { padding: 30px; }
+    .modal-body h2 { font-size: clamp(2rem, 5vw, 4rem); line-height: .95; letter-spacing: -.055em; margin: 10px 0 18px; }
+    .modal-summary { color: #bdbdb5; font-size: 1.04rem; max-width: 760px; }
+    .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 28px; }
+    .case-box { border: 1px solid var(--line); border-radius: 16px; padding: 18px; background: #111; }
+    .case-box h4 { color: var(--yellow); margin: 0 0 8px; font-size: .75rem; text-transform: uppercase; letter-spacing: .13em; }
+    .case-box p, .case-box ul { color: #b8b8b1; margin: 0; }
+    .case-box ul { padding-left: 18px; }
+
+    .command {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 12vh;
+      background: rgba(0,0,0,.66);
+      backdrop-filter: blur(8px);
+    }
+    .command.open { display: flex; }
+    .command-box { width: min(620px, calc(100% - 28px)); border: 1px solid var(--line); border-radius: 20px; background: #0b0b0b; box-shadow: var(--shadow); overflow: hidden; }
+    .command-input { width: 100%; border: 0; outline: 0; color: white; background: #101010; padding: 20px; border-bottom: 1px solid var(--line); }
+    .command-list { padding: 8px; }
+    .command-item { display: flex; justify-content: space-between; padding: 14px; border-radius: 12px; cursor: pointer; color: #d6d6cf; }
+    .command-item:hover { background: #181818; color: white; }
+    .kbd { border: 1px solid var(--line); background: #171717; color: var(--muted); padding: 2px 7px; border-radius: 7px; font-size: .72rem; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: .7s cubic-bezier(.2,.7,.2,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 960px) {
+      .nav a { display: none; }
+      .menu-button { display: inline-flex !important; }
+      .hero-grid, .about-grid, .stack-grid, .stack-grid-3, .domain-grid { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 520px; }
+      .project, .project.featured, .project.slim { grid-column: span 12; }
+      .flow { grid-template-columns: repeat(3, 1fr); }
+      .flow-7 { grid-template-columns: repeat(2, 1fr); }
+      .flow-7 .flow-step::after { display:none !important; }
+      .flow-step:nth-child(3)::after { display: none; }
+    }
+
+    @media (max-width: 680px) {
+      .wrap { width: min(100% - 24px, var(--max)); }
+      .topbar { height: 60px; }
+      .brand > span:last-child { display: none; }
+      .hero { padding-top: 110px; }
+      h1 { font-size: clamp(3.2rem, 18vw, 5rem); }
+      .hero-meta { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 430px; }
+      .console { transform: none; }
+      .floating-tag { display: none; }
+      section { padding: 72px 0; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 18px; }
+      .principles { grid-template-columns: 1fr; }
+      .project { min-height: 565px; padding: 22px; }
+      .health-grid { grid-template-columns: repeat(2,1fr); }
+      .cache-row { grid-template-columns: 110px 1fr 44px; }
+      .matrix-head, .matrix-row { grid-template-columns: 1.35fr repeat(3,.75fr); }
+      .matrix-head span, .matrix-row span, .matrix-row b { padding: 11px 8px; font-size:.68rem; }
+      .impact-strip { left: 22px; right: 22px; }
+      .flow { grid-template-columns: 1fr; }
+      .flow-step:not(:last-child)::after { display: none; }
+      .timeline-item { grid-template-columns: 48px 1fr; gap: 15px; }
+      .timeline-year { grid-column: 2; padding-top: 0; }
+      .timeline-content { grid-column: 2; }
+      .case-grid { grid-template-columns: 1fr; }
+      .footer-row { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <header class="topbar" aria-label="Primary navigation">
+    <a class="brand" href="#home">
+      <span class="brand-mark">DC</span>
+      <span>Devesh Chaudhary<small>AI Engineer · LLM Systems · Applied Intelligence</small></span>
+    </a>
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#domains">Domains</a>
+      <a href="#projects">Projects</a>
+      <a href="#stack">Stack</a>
+      <a href="#journey">Journey</a>
+      <button type="button" id="commandButton" title="Open command menu">⌘ K</button>
+      <button class="menu-button" type="button" id="mobileMenu">Menu</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-grid">
+        <div class="reveal">
+          <div class="availability"><i></i> Building private AI for healthcare, defense & industrial systems</div>
+          <h1><span class="outline">DATA</span> TO<br><span class="yellow">REASONING.</span></h1>
+          <p class="hero-copy">AI Engineer with nearly six years across classical ML, deep learning and applied AI — now focused on fine-tuning local LLMs, multimodal reasoning, edge intelligence and telemetry-driven decision systems for healthcare, defense and industrial environments.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#projects">Explore selected work <span>↘</span></a>
+            <button class="btn" type="button" id="openCommandHero">Navigate with ⌘ K</button>
+          </div>
+          <div class="hero-meta">
+            <div class="meta-card"><strong>~6</strong><span>Years across ML & AI</span></div>
+            <div class="meta-card"><strong>3+</strong><span>Years focused on LLM systems</span></div>
+            <div class="meta-card"><strong>8</strong><span>Deep-dive AI systems</span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="Animated AI engineering console">
+          <div class="orbit"></div><div class="orbit"></div>
+          <div class="console">
+            <div class="console-bar"><i></i><i></i><i></i></div>
+            <div class="console-screen">
+              <div class="screen-head"><span>mission-ai/private-runtime</span><span class="pulse"></span></div>
+              <div class="terminal">
+                <div><span class="cmd">$</span> launch --model local-llm --mode optimized</div>
+                <div class="dim">loading domain adapters...</div>
+                <div class="good">✓ healthcare + mission adapters mounted</div>
+                <div class="dim">warming prompt + KV cache...</div>
+                <div class="good">✓ multimodal telemetry tools connected</div>
+                <div class="dim">starting edge reasoning graph...</div>
+                <div class="good">✓ evidence-bound reasoning pipeline ready</div>
+                <div class="terminal-grid">
+                  <div class="terminal-tile"><small>Serving</small><b>Local / Edge</b></div>
+                  <div class="terminal-tile"><small>Attention</small><b>FlashAttention</b></div>
+                  <div class="terminal-tile"><small>Caching</small><b>Prefix + KV</b></div>
+                  <div class="terminal-tile"><small>Signals</small><b>Multimodal</b></div>
+                </div>
+              </div>
+            </div>
+            <div class="console-foot"><span>PYTORCH · VLLM · FASTAPI · AKS</span><span>STATUS: ONLINE</span></div>
+          </div>
+          <div class="floating-tag tag-1">QLoRA · SFT</div>
+          <div class="floating-tag tag-2">FlashAttention · Paged KV</div>
+          <div class="floating-tag tag-3">Edge · Air-Gapped</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Healthcare AI</span><span>Defense Edge AI</span><span>Local LLMs</span><span>QLoRA Fine-Tuning</span><span>FlashAttention</span><span>Prompt Caching</span><span>Multimodal RAG</span><span>Sensor Fusion</span><span>Telemetry Intelligence</span><span>Predictive Maintenance</span><span>Reasoning Agents</span>
+        <span>Healthcare AI</span><span>Defense Edge AI</span><span>Local LLMs</span><span>QLoRA Fine-Tuning</span><span>FlashAttention</span><span>Prompt Caching</span><span>Multimodal RAG</span><span>Sensor Fusion</span><span>Telemetry Intelligence</span><span>Predictive Maintenance</span><span>Reasoning Agents</span>
+      </div>
+    </div>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><span class="eyebrow">Profile</span><h2>From prediction<br>to high-stakes reasoning.</h2></div>
+          <p>I started with classical ML pipelines. Today, I engineer private AI systems that combine fine-tuned language models, multimodal data, telemetry, deterministic controls and human-in-the-loop validation.</p>
+        </div>
+        <div class="about-grid">
+          <div class="quote-card reveal">
+            <div class="quote">“The model is only one layer. The real system is context, reasoning, validation and action.”</div>
+            <div class="signature">Devesh Chaudhary · AI Engineer</div>
+          </div>
+          <div class="about-copy reveal">
+            <p><strong>Nearly six years across classical ML, deep learning and applied AI</strong> shaped an engineering-first approach: understand the failure mode, build a traceable intelligence layer, deploy it where the data lives, and measure whether it improves a real decision.</p>
+            <p>For the last three years, the focus has moved deeper into <strong>LLM fine-tuning, local inference, multimodal reasoning and telemetry intelligence</strong> — spanning healthcare decision support, defense edge systems, manufacturing, e-mobility and other environments where privacy, latency, evidence and reliability matter as much as model capability.</p>
+            <div class="principles">
+              <div class="principle"><b>Evidence over fluency</b><span>Answers are tied to retrieved context, signals, rules and confidence.</span></div>
+              <div class="principle"><b>Private by architecture</b><span>Local, edge and air-gapped inference paths when data cannot leave the environment.</span></div>
+              <div class="principle"><b>Multimodal by default</b><span>Reason across documents, images, tables and high-frequency telemetry together.</span></div>
+              <div class="principle"><b>Human control stays visible</b><span>Abstention, validation and operator review are designed into critical workflows.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="domains">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><span class="eyebrow">Applied AI domains</span><h2>One AI stack.<br>Different mission constraints.</h2></div>
+          <p>The architecture changes with the environment: clinical evidence and uncertainty in healthcare, offline and resilient intelligence in defense, and high-frequency signal reasoning in mobility and industrial systems.</p>
+        </div>
+        <div class="domain-grid">
+          <article class="domain-card reveal">
+            <div class="domain-top"><span>01</span><b>Healthcare Intelligence</b></div>
+            <h3>Multimodal context with evidence, uncertainty and human review.</h3>
+            <div class="domain-visual health-visual" aria-hidden="true">
+              <svg viewBox="0 0 520 150" preserveAspectRatio="none"><path d="M0 78H62L78 78L94 22L117 128L145 58L170 78H220L239 78L254 42L274 105L296 68L319 78H520" fill="none" stroke="#ffd400" stroke-width="3"/><path d="M0 115H520" stroke="rgba(255,255,255,.08)"/><circle cx="94" cy="22" r="5" fill="#ffd400"/><circle cx="254" cy="42" r="5" fill="#ffd400"/></svg>
+              <div class="mini-labels"><span>Vitals</span><span>Labs</span><span>Notes</span><span>Evidence</span></div>
+            </div>
+            <p>Clinical document reasoning, patient telemetry, risk prioritisation, evidence-grounded copilots and privacy-aware local inference.</p>
+          </article>
+          <article class="domain-card reveal">
+            <div class="domain-top"><span>02</span><b>Defense & Edge AI</b></div>
+            <h3>Reasoning that keeps working when connectivity and compute are constrained.</h3>
+            <div class="domain-visual fusion-visual" aria-hidden="true">
+              <svg viewBox="0 0 520 150"><circle cx="260" cy="75" r="52" fill="none" stroke="rgba(255,212,0,.25)"/><circle cx="260" cy="75" r="31" fill="rgba(255,212,0,.08)" stroke="#ffd400"/><circle cx="260" cy="75" r="5" fill="#ffd400"/><circle cx="92" cy="35" r="7" fill="#ffd400"/><circle cx="102" cy="119" r="7" fill="#ffd400"/><circle cx="426" cy="36" r="7" fill="#ffd400"/><circle cx="433" cy="116" r="7" fill="#ffd400"/><path d="M99 39L228 65M109 116L229 86M419 40L292 65M426 113L292 86" stroke="rgba(255,255,255,.32)" stroke-dasharray="6 6"/><path d="M260 23V127M208 75H312" stroke="rgba(255,212,0,.16)"/></svg>
+              <div class="mini-labels"><span>Sensor</span><span>Edge</span><span>Fusion</span><span>Operator</span></div>
+            </div>
+            <p>Air-gapped LLMs, sensor fusion, equipment-health intelligence, offline retrieval and operator decision support.</p>
+          </article>
+          <article class="domain-card reveal">
+            <div class="domain-top"><span>03</span><b>Mobility & Industrial AI</b></div>
+            <h3>Turn telemetry streams into explanations, predictions and engineering action.</h3>
+            <div class="domain-visual mobility-visual" aria-hidden="true">
+              <svg viewBox="0 0 520 150" preserveAspectRatio="none"><path d="M0 112C45 102 62 48 104 59S157 127 202 83S265 28 312 55S366 130 414 76S470 38 520 48" fill="none" stroke="#ffd400" stroke-width="3"/><path d="M0 122C65 112 86 91 130 99S205 116 256 90S342 96 399 84S472 80 520 68" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="2" stroke-dasharray="7 7"/></svg>
+              <div class="mini-labels"><span>Battery</span><span>Charger</span><span>Vehicle</span><span>Faults</span></div>
+            </div>
+            <p>Battery health, predictive maintenance, energy optimisation, fault diagnosis and performance intelligence for electric platforms.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><span class="eyebrow">Selected systems</span><h2>Eight deep-dive<br>AI projects.</h2></div>
+          <p>Each case study opens into the problem, system design, model/inference choices and the operational value created — without hiding everything behind a single model call.</p>
+        </div>
+        <div class="filters reveal" role="tablist" aria-label="Project filters">
+          <button class="filter-btn active" data-filter="all">All projects</button>
+          <button class="filter-btn" data-filter="llm">LLM / Inference</button>
+          <button class="filter-btn" data-filter="healthcare">Healthcare</button>
+          <button class="filter-btn" data-filter="defense">Defense</button>
+          <button class="filter-btn" data-filter="telemetry">Telemetry</button>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project featured reveal" tabindex="0" data-category="llm platform" data-project="runtime">
+            <div class="project-no">01 · Inference engineering</div>
+            <h3>Local LLM Runtime Accelerator</h3>
+            <p>A private serving stack that attacks latency at every layer — model precision, attention kernels, batching, decoding and cache reuse.</p>
+            <div class="chips"><span class="chip">PyTorch</span><span class="chip">QLoRA</span><span class="chip">FlashAttention</span><span class="chip">vLLM</span><span class="chip">Paged KV</span><span class="chip">Speculative Decoding</span></div>
+            <div class="project-visual token-flow" aria-hidden="true">
+              <div class="token-stage"><small>System context</small><b>2.8k tokens</b></div><span>→</span><div class="token-stage yellow"><small>Prefix cache</small><b>reuse</b></div><span>→</span><div class="token-stage"><small>Decode</small><b>stream</b></div>
+            </div>
+            <div class="impact-strip"><div><small>Engineering value</small><b>Private inference with a reusable latency, throughput and quality benchmark layer</b></div><span class="open-project">↗</span></div>
+          </article>
+
+          <article class="project slim reveal" tabindex="0" data-category="healthcare llm" data-project="clinical">
+            <div class="project-no">02 · Healthcare AI</div>
+            <h3>Multimodal Clinical Reasoning Copilot</h3>
+            <p>Builds a longitudinal patient context from notes, reports, lab trends and structured data, then answers with evidence and explicit uncertainty.</p>
+            <div class="chips"><span class="chip">Multimodal RAG</span><span class="chip">Qwen2.5-VL</span><span class="chip">Reranking</span><span class="chip">Guardrails</span></div>
+            <div class="project-visual">
+              <svg class="line-svg" viewBox="0 0 500 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 68H63L79 68L95 18L116 106L141 48L162 68H214L231 68L247 34L266 94L289 58L310 68H500" fill="none" stroke="#ffd400" stroke-width="3"/><rect x="344" y="22" width="130" height="76" rx="10" fill="#111" stroke="rgba(255,255,255,.18)"/><line x1="362" y1="43" x2="454" y2="43" stroke="#ffd400" stroke-width="5"/><line x1="362" y1="61" x2="438" y2="61" stroke="rgba(255,255,255,.35)" stroke-width="4"/><line x1="362" y1="79" x2="446" y2="79" stroke="rgba(255,255,255,.2)" stroke-width="4"/></svg>
+            </div>
+            <div class="impact-strip"><div><small>Operational value</small><b>Compresses fragmented clinical context into evidence-bound decision support with human review</b></div><span class="open-project">↗</span></div>
+          </article>
+
+          <article class="project slim reveal" tabindex="0" data-category="healthcare telemetry" data-project="patientTelemetry">
+            <div class="project-no">03 · Healthcare telemetry</div>
+            <h3>Patient Early-Warning Intelligence</h3>
+            <p>Continuously interprets vitals and device streams to detect deterioration patterns, suppress noisy alerts and explain why risk is changing.</p>
+            <div class="chips"><span class="chip">Time Series</span><span class="chip">Change Points</span><span class="chip">XGBoost</span><span class="chip">LLM Explanation</span></div>
+            <div class="project-visual health-grid" aria-hidden="true">
+              <div><small>SpO₂</small><b>96</b><i style="width:82%"></i></div><div><small>HR</small><b>84</b><i style="width:64%"></i></div><div><small>RR</small><b>18</b><i style="width:48%"></i></div><div><small>Trend risk</small><b>↑</b><i style="width:71%"></i></div>
+            </div>
+            <div class="impact-strip"><div><small>Operational value</small><b>Prioritises signal changes that deserve attention instead of generating another undifferentiated alert</b></div><span class="open-project">↗</span></div>
+          </article>
+
+          <article class="project featured reveal" tabindex="0" data-category="defense llm telemetry" data-project="edgeDefense">
+            <div class="project-no">04 · Defense edge intelligence</div>
+            <h3>Air-Gapped Sensor Fusion & Mission Copilot</h3>
+            <p>An offline reasoning layer that fuses field reports, equipment status and heterogeneous sensor streams into a traceable operational picture.</p>
+            <div class="chips"><span class="chip">Edge LLM</span><span class="chip">Sensor Fusion</span><span class="chip">Offline RAG</span><span class="chip">INT4</span><span class="chip">Tool Calling</span></div>
+            <div class="project-visual fusion-project" aria-hidden="true">
+              <svg viewBox="0 0 500 120"><circle cx="250" cy="60" r="39" fill="none" stroke="rgba(255,212,0,.28)"/><circle cx="250" cy="60" r="24" fill="rgba(255,212,0,.08)" stroke="#ffd400"/><circle cx="250" cy="60" r="4" fill="#ffd400"/><circle cx="68" cy="25" r="6" fill="#ffd400"/><circle cx="76" cy="96" r="6" fill="#ffd400"/><circle cx="427" cy="25" r="6" fill="#ffd400"/><circle cx="434" cy="96" r="6" fill="#ffd400"/><path d="M74 28L219 52M82 93L219 69M421 29L281 52M428 93L281 69" stroke="rgba(255,255,255,.32)" stroke-dasharray="5 5"/><text x="250" y="64" fill="#ffd400" font-size="10" text-anchor="middle">EDGE</text><text x="49" y="18" fill="#aaa" font-size="9">RF</text><text x="49" y="112" fill="#aaa" font-size="9">ASSET</text><text x="423" y="18" fill="#aaa" font-size="9">GEO</text><text x="410" y="112" fill="#aaa" font-size="9">REPORT</text></svg>
+            </div>
+            <div class="impact-strip"><div><small>Operational value</small><b>Resilient decision support when sensitive data, network access and compute are constrained</b></div><span class="open-project">↗</span></div>
+          </article>
+
+          <article class="project featured reveal" tabindex="0" data-category="defense telemetry" data-project="readiness">
+            <div class="project-no">05 · Defense predictive intelligence</div>
+            <h3>Mission-Critical Asset Health & Readiness</h3>
+            <p>Combines vibration, temperature, current draw, maintenance logs and failure history to surface degradation before it becomes downtime.</p>
+            <div class="chips"><span class="chip">Predictive Maintenance</span><span class="chip">Anomaly Detection</span><span class="chip">Survival Models</span><span class="chip">Telemetry</span></div>
+            <div class="project-visual readiness-grid" aria-hidden="true">
+              <div><span>Power unit</span><i><b style="width:86%"></b></i><em>86%</em></div><div><span>Comms</span><i><b style="width:94%"></b></i><em>94%</em></div><div><span>Cooling</span><i><b style="width:67%"></b></i><em>67%</em></div><div><span>Mobility</span><i><b style="width:78%"></b></i><em>78%</em></div>
+            </div>
+            <div class="impact-strip"><div><small>Operational value</small><b>Moves maintenance from fixed intervals toward evidence-based readiness and failure prevention</b></div><span class="open-project">↗</span></div>
+          </article>
+
+          <article class="project slim reveal" tabindex="0" data-category="telemetry industrial" data-project="telemetry">
+            <div class="project-no">06 · E-mobility intelligence</div>
+            <h3>Formula-E / Electric Fleet Telemetry Reasoning</h3>
+            <p>Connects battery, thermal, powertrain and charger signals with technical knowledge to explain anomalies and performance loss.</p>
+            <div class="chips"><span class="chip">Battery Health</span><span class="chip">Anomaly Detection</span><span class="chip">RAG</span><span class="chip">Time Series</span></div>
+            <div class="project-visual">
+              <svg class="line-svg" viewBox="0 0 500 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0,90 C55,95 60,25 115,50 S195,90 245,42 S325,15 375,62 S445,100 500,28" fill="none" stroke="#ffd400" stroke-width="3"/><path d="M0,100 C60,78 90,92 140,70 S240,92 300,54 S400,70 500,45" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2" stroke-dasharray="7 7"/></svg>
+            </div>
+            <div class="impact-strip"><div><small>Engineering value</small><b>Faster path from high-frequency telemetry to diagnosis, optimisation and engineering action</b></div><span class="open-project">↗</span></div>
+          </article>
+
+          <article class="project slim reveal" tabindex="0" data-category="llm platform" data-project="fineTuneFactory">
+            <div class="project-no">07 · Large-scale fine-tuning</div>
+            <h3>Domain LLM Fine-Tuning Factory</h3>
+            <p>A repeatable data-to-adapter pipeline for large multi-source corpora, from deduplication and packing through SFT, QLoRA and evaluation.</p>
+            <div class="chips"><span class="chip">Transformers</span><span class="chip">PEFT</span><span class="chip">QLoRA</span><span class="chip">Dataset Streaming</span><span class="chip">MLflow</span></div>
+            <div class="project-visual dataset-flow" aria-hidden="true">
+              <div><small>raw</small><b>▦ ▦ ▦ ▦ ▦</b></div><span>→</span><div><small>curate</small><b>▦ ▦ ▦</b></div><span>→</span><div class="yellow"><small>SFT / QLoRA</small><b>adapter</b></div><span>→</span><div><small>eval</small><b>✓</b></div>
+            </div>
+            <div class="impact-strip"><div><small>Engineering value</small><b>Makes domain adaptation reproducible, auditable and easier to compare across model families</b></div><span class="open-project">↗</span></div>
+          </article>
+
+          <article class="project featured reveal" tabindex="0" data-category="llm platform" data-project="cacheGateway">
+            <div class="project-no">08 · API & token economics</div>
+            <h3>Prompt + KV Cache Intelligence Gateway</h3>
+            <p>A routing layer that avoids repeatedly processing the same long system prompts, policies and retrieved context across high-volume LLM calls.</p>
+            <div class="chips"><span class="chip">Prefix Caching</span><span class="chip">KV Reuse</span><span class="chip">Redis</span><span class="chip">vLLM</span><span class="chip">OpenTelemetry</span></div>
+            <div class="project-visual cache-visual" aria-hidden="true">
+              <div class="cache-row"><span>System + policy context</span><i><b style="width:92%"></b></i><em>CACHED</em></div><div class="cache-row"><span>Retrieved context</span><i><b style="width:71%"></b></i><em>REUSE</em></div><div class="cache-row"><span>User delta</span><i><b style="width:23%"></b></i><em>NEW</em></div>
+            </div>
+            <div class="impact-strip"><div><small>Engineering value</small><b>Reduces repeated prefill work and makes latency/token cost observable at the request level</b></div><span class="open-project">↗</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><span class="eyebrow">Technology</span><h2>Deep model work.<br>Production constraints.</h2></div>
+          <p>The stack is chosen around the real bottleneck: adaptation quality, GPU memory, prefill latency, offline operation, retrieval quality, telemetry volume or validation requirements.</p>
+        </div>
+        <div class="stack-grid stack-grid-3">
+          <div class="stack-panel reveal">
+            <h3>Fine-tuning & model engineering</h3>
+            <p>Domain adaptation, evaluation and multimodal experimentation.</p>
+            <div class="tech-cloud"><span class="tech">PyTorch</span><span class="tech">Transformers</span><span class="tech">PEFT</span><span class="tech">LoRA</span><span class="tech">QLoRA</span><span class="tech">SFT</span><span class="tech">DPO</span><span class="tech">Qwen2.5-VL</span><span class="tech">Phi-3 Mini</span><span class="tech">MLflow</span></div>
+          </div>
+          <div class="stack-panel reveal">
+            <h3>Inference & serving</h3>
+            <p>Make capable models usable under latency, cost and privacy constraints.</p>
+            <div class="tech-cloud"><span class="tech">vLLM</span><span class="tech">FlashAttention</span><span class="tech">PagedAttention</span><span class="tech">Prompt Caching</span><span class="tech">KV Reuse</span><span class="tech">Speculative Decoding</span><span class="tech">INT8 / INT4</span><span class="tech">FastAPI</span><span class="tech">Docker</span><span class="tech">AKS</span></div>
+          </div>
+          <div class="stack-panel reveal">
+            <h3>Reasoning, telemetry & platforms</h3>
+            <p>Join unstructured knowledge with live signals, tools and enterprise systems.</p>
+            <div class="tech-cloud"><span class="tech">LangGraph</span><span class="tech">Hybrid RAG</span><span class="tech">BM25</span><span class="tech">Reranking</span><span class="tech">Azure ML</span><span class="tech">ADX / Kusto</span><span class="tech">Snowflake</span><span class="tech">OpenTelemetry</span><span class="tech">Prometheus</span><span class="tech">Power BI</span></div>
+          </div>
+        </div>
+        <div class="architecture reveal">
+          <h3>Reference architecture: private multimodal reasoning system</h3>
+          <div class="flow flow-7">
+            <div class="flow-step"><i>01</i><b>Signals</b><span>Vitals, sensors, telemetry, documents</span></div>
+            <div class="flow-step"><i>02</i><b>Privacy</b><span>Redaction, access, local boundaries</span></div>
+            <div class="flow-step"><i>03</i><b>Context</b><span>Parsing, windows, embeddings, metadata</span></div>
+            <div class="flow-step"><i>04</i><b>Retrieval</b><span>Hybrid search and reranking</span></div>
+            <div class="flow-step"><i>05</i><b>Reasoning</b><span>Fine-tuned LLM + tools + rules</span></div>
+            <div class="flow-step"><i>06</i><b>Validation</b><span>Evidence, confidence, abstention</span></div>
+            <div class="flow-step"><i>07</i><b>Action</b><span>Operator, clinician, engineer, API</span></div>
+          </div>
+        </div>
+        <div class="systems-matrix reveal">
+          <div class="matrix-head"><span>Capability</span><span>Healthcare</span><span>Defense</span><span>Mobility</span></div>
+          <div class="matrix-row"><span>Private / local LLM</span><b>●</b><b>●</b><b>●</b></div>
+          <div class="matrix-row"><span>Multimodal evidence</span><b>●</b><b>●</b><b>●</b></div>
+          <div class="matrix-row"><span>High-frequency telemetry</span><b>●</b><b>●</b><b>●</b></div>
+          <div class="matrix-row"><span>Human validation</span><b>●</b><b>●</b><b>●</b></div>
+          <div class="matrix-row"><span>Offline / constrained compute</span><b>◐</b><b>●</b><b>◐</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><span class="eyebrow">Journey</span><h2>Built layer by layer.</h2></div>
+          <p>A progression from analytics and forecasting to production ML, local LLMs, multimodal reasoning and private AI systems for high-stakes environments.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item reveal"><div class="timeline-dot">01</div><div class="timeline-year">Foundation</div><div class="timeline-content"><h3>Analytics, forecasting and data pipelines</h3><p>Built SQL/ETL workflows, dashboards, ARIMA/ETS/Prophet forecasting and anomaly detection. Past results included 3× faster ETL, 60% less reporting effort and 40% lower reporting latency.</p></div></div>
+          <div class="timeline-item reveal"><div class="timeline-dot">02</div><div class="timeline-year">Machine Learning</div><div class="timeline-content"><h3>From models to complete ML pipelines</h3><p>Expanded into feature engineering, model evaluation, Isolation Forest, predictive systems and production-oriented experimentation.</p></div></div>
+          <div class="timeline-item reveal"><div class="timeline-dot">03</div><div class="timeline-year">AI Engineering</div><div class="timeline-content"><h3>Enterprise architecture and applied AI</h3><p>Moved beyond individual models into APIs, cloud deployment, observability, workflow integration and governed decision systems.</p></div></div>
+          <div class="timeline-item reveal"><div class="timeline-dot">04</div><div class="timeline-year">Current focus</div><div class="timeline-content"><h3>Fine-tuned LLMs, multimodal reasoning and edge intelligence</h3><p>Designing local LLM runtimes, large-corpus fine-tuning pipelines, retrieval systems, prompt/KV caching, telemetry reasoning and validation layers for healthcare, defense, manufacturing and electric mobility.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <span>© <span id="year"></span> Devesh Chaudhary.</span>
+      <span>AI Engineering · LLM Systems · Applied Intelligence</span>
+    </div>
+  </footer>
+
+  <div class="modal" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-top"><span class="eyebrow">Case study</span><button class="modal-close" id="modalClose" aria-label="Close project">✕</button></div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="command" id="commandPalette" role="dialog" aria-modal="true" aria-label="Command navigation">
+    <div class="command-box">
+      <input class="command-input" id="commandInput" placeholder="Jump to a section…" autocomplete="off" />
+      <div class="command-list" id="commandList">
+        <div class="command-item" data-target="#home"><span>Home / Hero</span><span class="kbd">H</span></div>
+        <div class="command-item" data-target="#about"><span>Profile / About</span><span class="kbd">A</span></div>
+        <div class="command-item" data-target="#domains"><span>Applied AI domains</span><span class="kbd">D</span></div>
+        <div class="command-item" data-target="#projects"><span>Selected projects</span><span class="kbd">P</span></div>
+        <div class="command-item" data-target="#stack"><span>Technology stack</span><span class="kbd">T</span></div>
+        <div class="command-item" data-target="#journey"><span>Career journey</span><span class="kbd">J</span></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const projectData = {
+      runtime: {
+        number: "01 · Inference engineering",
+        title: "Local LLM Runtime Accelerator",
+        summary: "A private inference architecture for domain-tuned language models, designed around the real bottlenecks: memory, prefill cost, attention efficiency, decoding speed and repeated enterprise context.",
+        problem: "A model that fits on a GPU is not automatically a usable product. Long system prompts, repeated context, KV-memory pressure and sequential decoding can make local LLM experiences too slow for real workflows.",
+        build: ["LoRA / QLoRA adapters for domain-specific tuning", "FlashAttention-compatible execution paths and mixed precision", "vLLM serving with PagedAttention and continuous batching", "Prompt-prefix and KV-cache reuse for repeated context", "Speculative decoding path using a smaller draft model", "Benchmark harness covering TTFT, inter-token latency, throughput, memory and answer quality"],
+        stack: "PyTorch, Transformers, PEFT, QLoRA, FlashAttention, vLLM, PagedAttention, speculative decoding, Redis, FastAPI, Docker and AKS.",
+        value: "Creates a repeatable private-inference layer that can be tuned for latency, throughput and hardware constraints instead of treating the model endpoint as a black box."
+      },
+      clinical: {
+        number: "02 · Healthcare AI",
+        title: "Multimodal Clinical Reasoning Copilot",
+        summary: "A clinical decision-support workflow that assembles a longitudinal patient context from notes, reports, laboratory trends and structured records, then answers with evidence, uncertainty and explicit human review.",
+        problem: "Clinical information is fragmented across documents, tables and time. A useful assistant must preserve chronology, retrieve the right evidence, avoid overconfident synthesis and make it obvious where each conclusion came from.",
+        build: ["Clinical document parsing and patient-timeline construction", "Hybrid retrieval across notes, reports and structured observations", "Multimodal ingestion for document and image-heavy clinical material", "Reranking and evidence packaging before generation", "Reasoning prompts with uncertainty, abstention and citation requirements", "Safety checks that keep the system positioned as decision support rather than autonomous diagnosis"],
+        stack: "Python, Qwen2.5-VL, Transformers, hybrid RAG, embeddings, BM25, reranking, FastAPI, local inference and evaluation guardrails.",
+        value: "Reduces the cognitive work of assembling scattered patient context while keeping evidence, uncertainty and clinician control visible throughout the interaction."
+      },
+      patientTelemetry: {
+        number: "03 · Healthcare telemetry",
+        title: "Patient Early-Warning Intelligence",
+        summary: "A streaming telemetry layer that looks for meaningful changes across vitals and connected-device signals, then explains why the risk trajectory changed instead of emitting another opaque alert.",
+        problem: "High-frequency patient monitoring creates alert fatigue. The harder problem is separating transient noise from sustained deterioration and giving the reviewer a concise explanation of which signals changed together.",
+        build: ["Windowed feature generation for heart rate, oxygen saturation, respiratory rate and other signals", "Change-point and anomaly detection to identify sustained shifts", "Supervised risk models for prioritisation where labels are available", "Alert suppression and persistence logic to reduce noisy triggers", "LLM explanation layer constrained to computed signal evidence", "Trend visualisation and human-review handoff"],
+        stack: "Python, pandas, time-series features, change-point detection, XGBoost / tree ensembles, FastAPI, telemetry streaming and evidence-bound LLM summaries.",
+        value: "Turns continuous monitoring into prioritised, interpretable signal changes while preserving human clinical judgment for the final decision."
+      },
+      edgeDefense: {
+        number: "04 · Defense edge intelligence",
+        title: "Air-Gapped Sensor Fusion & Mission Copilot",
+        summary: "An offline AI layer for sensitive environments where field reports, equipment status and heterogeneous sensor feeds must be combined without depending on public cloud connectivity.",
+        problem: "Disconnected environments create a difficult combination of limited compute, intermittent networks, sensitive data and multiple information formats. Operators need a coherent picture without sending the underlying information outside the trusted boundary.",
+        build: ["Local document and report retrieval with offline indexes", "Sensor normalization and time-alignment before fusion", "Quantized edge LLM serving for constrained hardware", "Tool calls for equipment status, maps and structured stores", "Evidence-linked summaries with provenance and confidence", "Graceful degradation when individual data sources or connectivity are unavailable"],
+        stack: "Python, quantized local LLMs, vLLM / lightweight local serving, hybrid RAG, vector indexes, FastAPI, Docker, telemetry adapters and offline observability.",
+        value: "Provides resilient, traceable decision support while keeping sensitive operational data inside the local or air-gapped environment."
+      },
+      readiness: {
+        number: "05 · Defense predictive intelligence",
+        title: "Mission-Critical Asset Health & Readiness",
+        summary: "A predictive-maintenance system for mission-critical equipment that combines live condition signals with service history to estimate degradation and surface the assets most likely to need attention.",
+        problem: "Fixed maintenance intervals can replace healthy components too early or miss rapidly degrading ones. The useful signal is the interaction between current behavior, historical operating conditions and known failure patterns.",
+        build: ["Feature pipelines for vibration, temperature, current draw and operating cycles", "Asset-level anomaly baselines and health scores", "Failure-risk / remaining-useful-life style modelling where labels allow", "Maintenance-log retrieval to add historical context", "Reasoning layer that explains the strongest evidence behind a readiness flag", "Fleet-level prioritisation view for maintenance planning"],
+        stack: "Python, pandas, scikit-learn, XGBoost / LightGBM, anomaly detection, time-series analytics, retrieval and FastAPI.",
+        value: "Moves maintenance planning toward condition-based readiness, helping teams focus inspection and service effort where the evidence indicates emerging risk."
+      },
+      telemetry: {
+        number: "06 · E-mobility intelligence",
+        title: "Formula-E / Electric Fleet Telemetry Reasoning",
+        summary: "A telemetry reasoning system for electric mobility that connects battery, thermal, powertrain and charger signals with technical knowledge to explain performance loss and abnormal behavior.",
+        problem: "A high-performance electric platform can generate thousands of changing signals. Engineers need more than charts: they need to know which combination changed, what subsystem it points to and what evidence supports the hypothesis.",
+        build: ["Signal-quality checks, resampling and time-window aggregation", "Battery-health, thermal, energy and powertrain features", "Anomaly detection across vehicle and charging behavior", "Technical-context retrieval from manuals and known fault histories", "Reasoning layer that connects abnormal signals with plausible engineering causes", "Telemetry lineage, latency and evidence observability"],
+        stack: "Python, pandas, time-series models, Isolation Forest / XGBoost, FastAPI, vector retrieval, graph-style tool orchestration and OpenTelemetry.",
+        value: "Shortens the path from high-frequency signals to an explainable engineering hypothesis, supporting diagnosis, predictive maintenance and performance optimisation."
+      },
+      fineTuneFactory: {
+        number: "07 · Large-scale fine-tuning",
+        title: "Domain LLM Fine-Tuning Factory",
+        summary: "A reproducible pipeline for adapting open models to large domain corpora without turning data preparation, training and evaluation into disconnected notebooks.",
+        problem: "At scale, fine-tuning quality is often limited more by duplicate data, packing strategy, inconsistent formatting, weak evaluation and experiment drift than by the training script itself.",
+        build: ["Streaming ingestion for large multi-source datasets", "Deduplication, quality filtering and instruction-format normalization", "Sequence packing and token-distribution analysis", "SFT with LoRA / QLoRA adapters across candidate base models", "Checkpoint, metric and dataset lineage through experiment tracking", "Domain-specific evaluation sets for factuality, instruction following and task performance"],
+        stack: "PyTorch, Hugging Face Transformers / Datasets, PEFT, LoRA, QLoRA, dataset streaming, mixed precision, Azure ML and MLflow.",
+        value: "Turns model adaptation into a repeatable engineering workflow where data versions, adapters, evaluations and deployment candidates can be compared rather than recreated manually."
+      },
+      cacheGateway: {
+        number: "08 · API & token economics",
+        title: "Prompt + KV Cache Intelligence Gateway",
+        summary: "A request-routing layer for high-volume LLM systems that detects reusable prompt prefixes and stable context so the serving stack does not repeatedly pay the same prefill cost.",
+        problem: "Enterprise prompts often contain long policies, schemas and retrieved reference blocks that barely change between requests. Reprocessing them inflates latency, GPU work and token cost even when only the user-specific delta is new.",
+        build: ["Canonicalization and hashing of stable prompt prefixes", "Prefix-cache and KV-cache-aware routing", "Exact and safe semantic cache layers for eligible responses", "TTL and invalidation tied to source-document versions", "Per-request telemetry for cached vs new tokens and TTFT", "Fallback path that bypasses caching when context freshness or safety requires it"],
+        stack: "vLLM, PagedAttention, prefix / prompt caching, Redis, FastAPI, OpenTelemetry, Prometheus and containerized serving.",
+        value: "Reduces repeated prefill work and makes the token/latency economics of an LLM application visible enough to optimise systematically."
+      }
+    };
+
+    const modal = document.getElementById('projectModal');
+    const modalBody = document.getElementById('modalBody');
+    const modalClose = document.getElementById('modalClose');
+
+    function openProject(key) {
+      const d = projectData[key];
+      modalBody.innerHTML = `
+        <div class="project-no">${d.number}</div>
+        <h2 id="modalTitle">${d.title}</h2>
+        <p class="modal-summary">${d.summary}</p>
+        <div class="case-grid">
+          <div class="case-box"><h4>Problem</h4><p>${d.problem}</p></div>
+          <div class="case-box"><h4>Technology</h4><p>${d.stack}</p></div>
+          <div class="case-box"><h4>What was built</h4><ul>${d.build.map(x => `<li>${x}</li>`).join('')}</ul></div>
+          <div class="case-box"><h4>Value generated</h4><p>${d.value}</p></div>
+        </div>`;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      modalClose.focus();
+    }
+    function closeProject() { modal.classList.remove('open'); document.body.style.overflow = ''; }
+    document.querySelectorAll('.project').forEach(card => {
+      card.addEventListener('click', () => openProject(card.dataset.project));
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openProject(card.dataset.project); } });
+    });
+    modalClose.addEventListener('click', closeProject);
+    modal.addEventListener('click', e => { if (e.target === modal) closeProject(); });
+
+    const command = document.getElementById('commandPalette');
+    const commandInput = document.getElementById('commandInput');
+    function openCommand() { command.classList.add('open'); document.body.style.overflow = 'hidden'; setTimeout(() => commandInput.focus(), 20); }
+    function closeCommand() { command.classList.remove('open'); document.body.style.overflow = ''; commandInput.value = ''; filterCommands(''); }
+    document.getElementById('commandButton').addEventListener('click', openCommand);
+    document.getElementById('openCommandHero').addEventListener('click', openCommand);
+    document.getElementById('mobileMenu').addEventListener('click', openCommand);
+    document.addEventListener('keydown', e => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); command.classList.contains('open') ? closeCommand() : openCommand(); }
+      if (e.key === 'Escape') { closeCommand(); closeProject(); }
+    });
+    command.addEventListener('click', e => { if (e.target === command) closeCommand(); });
+    document.querySelectorAll('.command-item').forEach(item => item.addEventListener('click', () => { document.querySelector(item.dataset.target).scrollIntoView(); closeCommand(); }));
+    function filterCommands(query) {
+      document.querySelectorAll('.command-item').forEach(item => item.style.display = item.textContent.toLowerCase().includes(query.toLowerCase()) ? 'flex' : 'none');
+    }
+    commandInput.addEventListener('input', e => filterCommands(e.target.value));
+
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.project').forEach(card => {
+        const show = filter === 'all' || card.dataset.category.includes(filter);
+        card.style.display = show ? 'block' : 'none';
+      });
+    }));
+
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    }), { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const glow = document.getElementById('cursorGlow');
+    window.addEventListener('pointermove', e => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
